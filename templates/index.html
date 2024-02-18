@@ -3,9 +3,9 @@
 
 <section id="hero">
   <div class="hero-container">
-    <h3>Welcome to <strong>WorldXplorer</strong></h3>
-    <h1>Explore the world with WorldXplorer</h1>
-    <h2>Dear, {{user.username}} WorldXplorer Welcomes you ...</h2>
+    <h3>Welcome to <strong>DriveSync</strong></h3>
+    <h1>Explore the world with DriveSync Limited</h1>
+    <h2>Dear, {{user.username}} DriveSync Welcomes you ...</h2>
     <a href="" class="btn-get-started scrollto">Browse Now</a>
   </div>
 </section>
@@ -32,8 +32,8 @@
     {% endfor %}
 
     <div class="section-title">
-      <h2>Location based Premium Accomodations</h2>
-      <h3>Checkout our <span>Premium Rooms</span></h3>
+      <h2>Category based Premium Recommendations</h2>
+      <h3>Checkout our <span>Premium Bookings</span></h3>
     </div>
 <br>
     <div class="card bg-light p-3">
@@ -43,18 +43,18 @@
           <div class="row g-3">
               <div class="col-md-4">
                   <div class="form-group">
-                      <label for="room-name-select">Hotel Name:</label>
+                      <label for="room-name-select">Vehicle Name:</label>
                       <select class="form-select" id="room-name-select" name="room_name">
                           <option value="">All</option>
-                          {% for room_name in room_names %}
-                              <option value="{{ room_name }}" {% if selected_room_name == room_name %}selected{% endif %}>{{ room_name }}</option>
+                          {% for vehicle_name in room_names %}
+                              <option value="{{ vehicle_name }}" {% if selected_room_name == vehicle_name %}selected{% endif %}>{{ vehicle_name }}</option>
                           {% endfor %}
                       </select>
                   </div>
               </div>
               <div class="col-md-4">
                   <div class="form-group">
-                      <label for="category">Location:</label>
+                      <label for="category">Category:</label>
                       <select class="form-select" id="category" name="category">
                           <option value="">All</option>
                           {% for category in categories %}
@@ -65,7 +65,7 @@
               </div>
               <div class="col-md-4">
                   <div class="form-group">
-                      <label for="subcategory">Room Type:</label>
+                      <label for="subcategory">Vehicle Type:</label>
                       <select class="form-select" id="subcategory" name="subcategory">
                           <option value="">All</option>
                           {% for subcategory in subcategories %}
@@ -135,33 +135,34 @@
     </div>
     <div class="card-body">
       <h5 class="card-title mt-2" id="namepr{{ i.id }}">
-        {{ i.room_name }}
+        {{ i.vehicle_name }}
       </h5>
       <!-- Add the new fields here -->
       <p class="card-text mt-2">
-        No. of Vacancies: {{ i.vacancies }}
+        Stock Availability: {{ i.vacancies }}
       </p>
       <p class="card-text">
         Facilities:
-        {% if i.has_food_facility %}
-        <i class="fas fa-utensils text-success"></i>
+        {% if i.high_power %}
+        <i class="fas fa-bolt text-success"></i>
         {% endif %}
-        {% if i.has_swimming_pool %}
-        <i class="fas fa-swimmer text-success"></i>
+        {% if i.good_mileage %}
+        <i class="fas fa-tachometer-alt text-success"></i>
         {% endif %}
-        {% if i.near_airport %}
-        <i class="fas fa-plane text-success"></i>
+        {% if i.high_range %}
+        <i class="fas fa-road text-success"></i>
         {% endif %}
-        {% if i.sea_area %}
-        <i class="fas fa-water text-success"></i>
+        {% if i.charging_capacity %}
+        <i class="fas fa-plug text-success"></i>
         {% endif %}
-      </p>
+    </p>
+    
       <!-- End of displaying new fields -->
       <h6 class="card-title mb-3">
-        Price: ₹<span id="pricepr{{ i.id }}">{{ i.price }}</span> INR/-
+        Rent per Day: ₹<span id="pricepr{{ i.id }}">{{ i.price }}</span> INR/-
       </h6>
       <h6 class="card-title mb-3">
-        Room Type: <span id="pricepr{{ i.id }}">{{ i.subcategory }}</span>
+        Vehicle Type: <span id="pricepr{{ i.id }}">{{ i.subcategory }}</span>
       </h6>
       <span id="divpr{{ i.id }}" class="divpr">
         {% if i.vacancies > 0 %}
@@ -200,8 +201,8 @@
   <div class="container">
 
     <div class="section-title">
-      <h2>Popular destinations</h2>
-      <h3>Browse the most Popular <span>Destinations</span></h3>
+      <h2>Popular Locations</h2>
+      <h3>Browse the most Popular <span>Locations</span></h3>
     </div>
 
     <div class="row">

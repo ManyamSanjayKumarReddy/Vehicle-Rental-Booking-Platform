@@ -11,17 +11,17 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
-class RoomType(models.Model):
-    room_name = models.CharField(max_length=100)
+class VehicleType(models.Model):
+    vehicle_name = models.CharField(max_length=100)
     category = models.CharField(max_length=100, default="")
     subcategory = models.CharField(max_length=50, default="")
     price = models.IntegerField(default=0)
     desc = models.CharField(max_length=1000)
     vacancies = models.PositiveIntegerField(default=0)
-    has_food_facility = models.BooleanField(default=False)
-    has_swimming_pool = models.BooleanField(default=False)
-    near_airport = models.BooleanField(default=False)
-    sea_area = models.BooleanField(default=False)
+    high_power = models.BooleanField(default=False)
+    good_mileage = models.BooleanField(default=False)
+    high_range = models.BooleanField(default=False)
+    charging_capacity = models.BooleanField(default=False)
     image = models.ImageField(upload_to='images/images', default="")
     image1 = models.ImageField(upload_to='images/additional-images', default="")
     image2 = models.ImageField(upload_to='images/additional-images', default="")
@@ -31,7 +31,7 @@ class RoomType(models.Model):
     image6 = models.ImageField(upload_to='images/additional-images', default="")
 
     def __str__(self):
-        return self.room_name
+        return self.vehicle_name
 
 
 class Orders(models.Model):
@@ -57,11 +57,11 @@ class Orders(models.Model):
         return self.name
 
 class Rating(models.Model):
-    room = models.ForeignKey(RoomType, on_delete=models.CASCADE)
+    room = models.ForeignKey(VehicleType, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
     comment = models.TextField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Rating {self.pk} for {self.room.room_name} by {self.user.username} ({self.rating})"
+        return f"Rating {self.pk} for {self.room.vehicle_name} by {self.user.username} ({self.rating})"

@@ -3,17 +3,18 @@
 {% block content %}
 
 <section id="hero">
-  <div class="hero-container">
-    <h3>Welcome to <strong>WorldXplorer</strong></h3>
-    <h1>Explore the world with WorldXplorer</h1>
-    <h2>Dear user, please complete your Signup</h2>
-    <a href="" class="btn-get-started scrollto">Browse Now</a>
-  </div>
-</section>
+    <div class="hero-container">
+      <h3>Welcome to <strong>DriveSync</strong></h3>
+      <h1>Explore the world with DriveSync Limited</h1>
+      <h2>Dear, {{user.username}} DriveSync Welcomes you ...</h2>
+      <a href="" class="btn-get-started scrollto">Browse Now</a>
+    </div>
+  </section>
 
 {% endblock content %}
 {% block body %}
 <div class="container">
+    <br>
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
             <div class="card shadow p-5">
@@ -23,7 +24,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 {% endfor %}
-                <h3 class="text-dark mb-4">WorldXplorer - SignUp</h3>
+                <h3 class="text-dark mb-4">DriveSync - SignUp</h3>
                 {% if form.errors %}
                 <div class="alert alert-danger">
                     <strong>Oops!</strong> There were some errors with your submission:
@@ -113,6 +114,7 @@
                     <p>Already a User? <a href="/auth/login/">Login</a></p>
                 </form>
             </div>
+            <br>
         </div>  
     </div>
 </div>

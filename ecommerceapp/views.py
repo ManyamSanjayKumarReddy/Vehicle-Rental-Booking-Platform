@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from ecommerceapp.models import Contact,RoomType,Orders, Rating
+from ecommerceapp.models import Contact,VehicleType,Orders, Rating
 from django.contrib import messages
 from math import ceil
 from django.contrib.auth.decorators import login_required
@@ -19,19 +19,19 @@ from .models import Orders
 
 # Create your views here.
 def index(request):
-    room_names = RoomType.objects.values_list('room_name', flat=True).distinct()
-    categories = RoomType.objects.values_list('category', flat=True).distinct()
-    subcategories = RoomType.objects.values_list('subcategory', flat=True).distinct()
+    room_names = VehicleType.objects.values_list('vehicle_name', flat=True).distinct()
+    categories = VehicleType.objects.values_list('category', flat=True).distinct()
+    subcategories = VehicleType.objects.values_list('subcategory', flat=True).distinct()
 
 
-    selected_room_name = request.GET.get('room_name')
+    selected_room_name = request.GET.get('vehicle_name')
     selected_category = request.GET.get('category')
     selected_subcategory = request.GET.get('subcategory')
 
-    rooms = RoomType.objects.all()
+    rooms = VehicleType.objects.all()
 
     if selected_room_name:
-        rooms = rooms.filter(room_name=selected_room_name)
+        rooms = rooms.filter(vehicle_name=selected_room_name)
 
     if selected_category:
         rooms = rooms.filter(category=selected_category)
@@ -63,7 +63,7 @@ def index(request):
     return render(request, "index.html", params)
 
 def room_detail(request, room_id):
-    room = get_object_or_404(RoomType, id=room_id)
+    room = get_object_or_404(VehicleType, id=room_id)
     return render(request, 'room_detail.html', {'room': room})
     
 def contact(request):
@@ -155,7 +155,7 @@ def process_payment(request):
 
 @login_required
 def room_detail(request, room_id):
-    room = get_object_or_404(RoomType, id=room_id)
+    room = get_object_or_404(VehicleType, id=room_id)
     user_rating = Rating.objects.filter(room=room, user=request.user).first()
 
     if request.method == 'POST':
@@ -238,13 +238,13 @@ def dashboard(request):
     total_bookings = Orders.objects.count()
     total_revenue = Orders.objects.aggregate(total=Sum('amount'))['total']
 
-    locations_highest_booking = RoomType.objects.values('category').annotate(num_bookings=Count('category')).order_by('-num_bookings')[:5]
+    locations_highest_booking = VehicleType.objects.values('category').annotate(num_bookings=Count('category')).order_by('-num_bookings')[:5]
 
-    room_types_highest_booking = RoomType.objects.values('subcategory').annotate(num_bookings=Count('subcategory')).order_by('-num_bookings')[:5]
+    room_types_highest_booking = VehicleType.objects.values('subcategory').annotate(num_bookings=Count('subcategory')).order_by('-num_bookings')[:5]
 
-    locations_more_sales = RoomType.objects.values('category').annotate(total_sales=Sum('price')).order_by('-total_sales')[:5]
+    locations_more_sales = VehicleType.objects.values('category').annotate(total_sales=Sum('price')).order_by('-total_sales')[:5]
 
-    room_types_more_sales = RoomType.objects.values('subcategory').annotate(total_sales=Sum('price')).order_by('-total_sales')[:5]
+    room_types_more_sales = VehicleType.objects.values('subcategory').annotate(total_sales=Sum('price')).order_by('-total_sales')[:5]
 
     context = {
         'total_users': total_users,
